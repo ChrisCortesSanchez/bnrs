@@ -9,3 +9,11 @@ STATE_CODE = 'state_code'
 city_cache = {}
 
 SAMPLE_CITY = {NAME:'New York', STATE_CODE:'NY'}
+
+def is_valid_id(id:str) -> bool:
+    if not(isinstance(id, str)):
+        return False
+    if len(id) < MIN_ID_LEN:
+        return False
+    return True
+

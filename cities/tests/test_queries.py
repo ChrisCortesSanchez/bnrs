@@ -31,3 +31,9 @@ def test_create_bad_name():
 def test_create_bad_param_type():
     with pytest.raises(ValueError):
       qry.create(17)
+
+@patch('cities.queries.db_connect', return_value=True, autospec=True)
+def test_read(mock_sb_connect):
+    cities = qry.read()
+    assert isinstance(cities, dict)
+    assert len(cities) > 1

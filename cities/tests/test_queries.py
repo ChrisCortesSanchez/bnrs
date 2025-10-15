@@ -1,5 +1,5 @@
 import pytest
-
+from unittest.mock import patch
 import cities.queries as qry
 
 

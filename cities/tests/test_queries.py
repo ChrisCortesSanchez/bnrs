@@ -42,3 +42,9 @@ def test_read(mock_db_connect):
 def test_read(mock_db_connect):
     with pytest.raises(ConnectionError):
         cities = qry.read()
+
+
+@pytest.fixture(scope='function')
+def test_city():
+    new_rec_id = qry.create(qry.SAMPLE_CITY)
+    yield new_rec_id

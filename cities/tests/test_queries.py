@@ -79,3 +79,9 @@ def multiple_cities():
             qry.delete(city_id)
 
 
+# Additional raises to test for deleting a citiy twice
+def test_delete_twice_raises_error(test_city):
+    """Test that deleting same city twice raises ValueError"""
+    qry.delete(test_city)
+    with pytest.raises(ValueError, match='No such city'):
+        qry.delete(test_city)

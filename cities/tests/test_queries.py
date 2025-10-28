@@ -36,10 +36,10 @@ def test_create_bad_param_type():
 def test_read(mock_db_connect):
     cities = qry.read()
     assert isinstance(cities, dict)
-    assert len(cities) > 1
+    assert temp_city in cities
 
 @patch('cities.queries.db_connect', return_value=False, autospec=True)
-def test_read(mock_db_connect):
+def test_read_cant_connect(mock_db_connect):
     with pytest.raises(ConnectionError):
         cities = qry.read()
 

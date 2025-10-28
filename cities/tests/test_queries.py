@@ -60,3 +60,22 @@ def test_delete_not_there(mock_db_connect):
     with pytest.raises(ValueError):
         qry.delete('some value that is not there')
 
+
+# Additional fixture for creating multiple cities
+@pytest.fixture(scope='function')
+def multiple_cities():
+    """Fixture that creates multiple test cities and cleans up"""
+    city_ids = []
+    for i in range(3):
+        city_id = qry.create({
+            qry.NAME: f'TestCity{i}',
+            qry.STATE_CODE: f'T{i}'
+        })
+        city_ids.append(city_id)
+    yield city_ids
+    # Cleanup
+    for city_id in city_ids:
+        if city_id in qry.city_cache:
+            qry.delete(city_id)
+
+

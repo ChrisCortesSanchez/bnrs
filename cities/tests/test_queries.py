@@ -48,3 +48,15 @@ def test_read(mock_db_connect):
 def test_city():
     new_rec_id = qry.create(qry.SAMPLE_CITY)
     yield new_rec_id
+
+
+def test_delete(mock_db_connect, temp_city):
+    qry.delete(temp_city)
+    assert temp_city not in qry.read()
+
+
+@patch('cities.queries.db_connect', return_value=True, autospec=True)
+def test_delete_not_there(mock_db_connect):
+    with pytest.raises(ValueError):
+        qry.delete('some value that is not there')
+

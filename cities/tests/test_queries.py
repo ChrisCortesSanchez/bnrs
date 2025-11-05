@@ -50,9 +50,9 @@ def test_city():
     yield new_rec_id
 
 
-def test_delete(mock_db_connect, temp_city):
-    qry.delete(temp_city)
-    assert temp_city not in qry.read()
+def test_delete(temp_city_no_del):
+    ret = qry.delete(temp_city_no_del[qry.NAME], temp_city_no_del[qry.STATE_CODE])
+    assert ret == 1
 
 
 @patch('cities.queries.db_connect', return_value=True, autospec=True)

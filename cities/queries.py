@@ -1,10 +1,12 @@
 """
 This file deals with our city-level data.
 """
-from random import randint
+import data.db_connect as dbc
 
 
 MIN_ID_LEN = 1
+
+CITY_COLLECTION = 'cities'
 
 ID = 'id'
 NAME = 'name'
@@ -15,16 +17,8 @@ SAMPLE_CITY = {
     STATE_CODE: 'NY',
 }
 
-city_cache = {
-    1: SAMPLE_CITY,
-}
+city_cache = {}
 
-
-def db_connect(success_ratio: int) -> bool:
-    """
-    Return True if connected, False if not.
-    """
-    return randint(1, success_ratio) % success_ratio
 
 
 def is_valid_id(_id: str) -> bool:
@@ -40,12 +34,13 @@ def num_cities() -> int:
 
 
 def create(flds: dict) -> str:
+    dbc.connect_db()
     if not isinstance(flds, dict):
         raise ValueError(f'Bad type for {type(flds)=}')
     if not flds.get(NAME):
         raise ValueError(f'Bad value for {flds.get(NAME)=}')
-    new_id = str(len(city_cache) + 1)
-    city_cache[new_id] = flds
+    new_id = dbc.create(CITY_COLLECTION, flds)
+    print(f"{new_id}")
     return new_id
 
 

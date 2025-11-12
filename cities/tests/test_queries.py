@@ -1,6 +1,17 @@
 import pytest
+from copy import deepcopy
 from unittest.mock import patch
 import cities.queries as qry
+
+
+def get_temp_rec():
+    return deepcopy(qry.SAMPLE_CITY)
+
+@pytest.fixture(scope='function')
+def temp_city_no_del():
+    temp_rec = get_temp_rec()
+    qry.create(get_temp_rec())
+    return temp_rec
 
 
 @pytest.mark.skip('This is an example of a bad test!')

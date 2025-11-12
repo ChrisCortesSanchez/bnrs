@@ -52,8 +52,6 @@ def delete(city_id: str)->bool:
 
 
 def read() -> dict:
-    if not db_connect(3):
-        raise ConnectionError('Could not connect to DB.')
     return city_cache
 
 

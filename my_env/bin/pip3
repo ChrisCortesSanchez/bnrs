@@ -1,4 +1,4 @@
-#!/Users/chriscortes/Documents/GitHub/bnrs_proj/my_env/bin/python3
+#!/Users/chriscortes/Documents/bnrs/my_env/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

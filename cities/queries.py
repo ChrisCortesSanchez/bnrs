@@ -1,8 +1,7 @@
 """
 This file deals with our city-level data.
 """
-import data.db_connect as dbc
-
+import data.db_connect as db_connect
 
 MIN_ID_LEN = 1
 
@@ -18,7 +17,6 @@ SAMPLE_CITY = {
 }
 
 city_cache = {}
-
 
 
 def is_valid_id(_id: str) -> bool:
@@ -39,18 +37,24 @@ def create(flds: dict) -> str:
         raise ValueError(f'Bad type for {type(flds)=}')
     if not flds.get(NAME):
         raise ValueError(f'Bad value for {flds.get(NAME)=}')
-    new_id = dbc.create(CITY_COLLECTION, flds)
-    print(f"{new_id}")
+    new_id = db_connect.create(CITY_COLLECTION, flds)
+    print(f'{new_id=}')
     return new_id
 
-def delete(name: str, state_code: str)-> bool:
-    ret = dbc.delete(CITY_COLLECTION, {NAME: name, STATE_CODE: state_code})
+
+def delete(name: str, state_code: str) -> bool:
+    filter_query = {
+        NAME: name,
+        STATE_CODE: state_code,
+    }
+    ret = db_connect.delete(CITY_COLLECTION, filter_query)
     if ret < 1:
-        raise ValueError(f'City not found : {name}, {state_code}')
+        raise ValueError(f'City not found: {name}, {state_code}')
     return ret
 
-def read() -> dict:
-    return dbc.read(CITY_COLLECTION)
+
+def read() -> list:
+    return db_connect.read(CITY_COLLECTION)
 
 
 def main():

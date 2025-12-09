@@ -51,4 +51,4 @@ jobs:
       - name: Deploy to PythonAnywhere
         run: ./deploy.sh
         env:
-          DEMO_PA_PWD: ${{secrets.DEMO_PA_PWD}}
+          BNRS_PA_PWD: ${{secrets.BNRS_PA_PWD}}

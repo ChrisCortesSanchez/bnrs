@@ -9,7 +9,7 @@ import pymongo as pm
 LOCAL = "0"
 CLOUD = "1"
 
-GEO_DB = 'geoDB'
+GEO_DB = 'GeoData'
 
 client = None
 
